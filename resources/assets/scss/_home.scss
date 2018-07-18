@@ -1,0 +1,58 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.colunas {
+  display: flex;
+
+  @media only screen and (max-width: $bp-pequeno) {
+    flex-direction: column;
+  }
+}
+
+.adm-home, 
+.prof-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media only screen and (max-width: $bp-pequeno) {
+    margin-bottom: 3.5rem;
+  }
+}
+
+.adm-home {
+  margin-right: 20rem;
+
+  @media only screen and (max-width: $bp-pequeno) {
+    margin-right: 0;
+  }
+}
+
+.btn-home {
+  display: block;
+  margin-bottom: 5rem;  
+  padding: 2rem;
+  width: 130px;
+  background-color: $cor-clara;
+  text-align: center;
+  color: $cor-texto;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border: 2px solid darken($cor-clara, 10%);
+
+  svg {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    font-size: 4rem;
+    color: lighten($cor-texto, 10%);
+  }
+
+  &:hover {
+    background-color: darken($cor-clara, 10%);
+    border-color: darken($cor-clara, 20%)
+  }
+}

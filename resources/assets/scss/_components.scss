@@ -1,0 +1,285 @@
+// botões
+.btn {
+  padding: 1rem 1.5rem;
+  color: $cor-oposta;
+  background-color: $cor-primaria;
+  border: none;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: all .3s;
+
+  &-cadastrar {
+    right: 3%;
+  
+    @include botao($cor-primaria);
+  }
+
+  &-voltar {
+    left: 3%;
+  
+    @include botao($cor-clara);
+  }
+
+  &-cadastrar,
+  &-voltar {
+    position: fixed;
+    font-size: 3.5rem;
+    bottom: 3%;
+    z-index: 5;
+  }
+
+  &-add {
+    @include botao($cor-primaria);  
+  }
+
+  &-editar {
+    @include botao($cor-btn-editar);  
+  }
+
+  &-apagar {
+    @include botao($cor-btn-apagar);  
+  }
+
+  &-imprimir {
+    @include botao($cor-btn-imprimir);  
+  }
+
+  &-gerarDoc {
+    @include botao($cor-btn-editar);  
+  }
+}
+
+// pesquisar
+main {
+  position: relative;
+
+  .pesquisar {
+    position: absolute;
+    right: 3%;
+    top: 3%;
+    font-size: 2.3rem;
+
+    &-input{
+      @include form-input();
+      position: relative;
+      width: 2rem;
+      top:0;
+      right:0;
+      border-color: $cor-primaria;
+      cursor: pointer;
+      transition: width .3s;
+
+      &:focus {
+        width: 30rem;
+      }
+    }
+
+    svg {
+      position: absolute;
+      right: 1rem;
+      top: .8rem;
+      color: lighten($cor-primaria, 10%);
+      cursor: pointer;
+      transition: all .3s;
+
+      &:hover {
+        color: $cor-primaria;
+      }
+    }
+  }
+}
+
+// tabela 
+main {
+  table {
+    width: 95%;
+    margin: 3rem auto;
+    border-collapse: collapse;
+    background-color: $cor-oposta;
+  }
+
+  tr {
+    border-top: 1px solid $cor-clara;
+    transition: all .3s;
+    
+    &:hover {
+      background-color: lighten($cor-clara, 8%);
+    }
+  }
+
+  th {
+    font-size: 2.2rem;
+    padding: 2rem 1.5rem;      
+    background-color: $cor-primaria;
+    color: $cor-oposta;
+  }
+
+  td {
+    padding: 2rem 1.5rem;  
+  }
+}
+
+// modal
+.modal-wrapper {
+  @extend .hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba($cor-preta, .5);
+  z-index: 100;
+}
+
+.modal {
+  font-size: 1.8rem;
+  background-color: $cor-branca;
+  border-radius: 4px;
+  width: 45%;
+
+  @media only screen and (max-width: $bp-grande) {
+    width: 60%;
+  }
+
+  @media only screen and (max-width: $bp-pequeno) {
+    width: 85%;
+  }
+
+  &-header {
+    padding: 2rem;
+    background-color: $cor-primaria;
+    color: $cor-branca;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    
+    h3 {
+      display: inline-block;
+    }
+  }
+  
+  &-body { // barra de rolagem
+    max-height: calc(100vh - 10rem);
+    overflow-y: auto;
+  }
+
+  .btn-fechar {
+    font-size: 2.5rem;
+    text-decoration: none;
+    color: $cor-branca;
+    float: right;
+    transition: all .3s;
+
+    &:hover {
+      color: $cor-clara;      
+    }
+  }
+
+  .form-group {
+    margin: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media only screen and (max-width: $bp-pequeno) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &:last-child {
+      justify-content: space-around;
+
+      @media only screen and (max-width: $bp-pequeno) {
+        flex-direction: row;
+      }
+    }
+
+    &.checkbox { // administrativos
+      @media only screen and (max-width: $bp-pequeno) {
+        flex-direction: row; 
+      }
+  
+      label {
+        margin-left: .5rem;
+        text-align: left;
+        cursor: pointer;
+      }
+    }
+  }
+
+  label {
+    display: inline-block;
+    margin-right: 1rem;
+    width: 20%;
+    text-align: right;
+    font-weight: 600;
+
+    @media only screen and (max-width: $bp-pequeno) {
+      text-align: left;
+      width: 100%;
+    }
+  }
+
+  &-input,
+  &-select,
+  .btn-modal {
+    @include form-input();    
+  }
+
+  &-input,
+  &-select-info {
+    width: 70%;
+
+    @media only screen and (max-width: $bp-pequeno) {
+      width: 90%;
+    }
+  }
+
+  &-data { // feriado
+    display: flex;
+    justify-content: space-between;
+    width: 74%;
+
+    @media only screen and (max-width: $bp-pequeno) {
+      width: 95%;
+    }
+
+    & > *  {
+      width: 33.33%;
+      margin-right: 1rem;
+    }
+
+    & > :last-child {
+      margin-right: 0;
+    }
+  }
+  
+  th,
+  td { // horário dos professores
+    width: 30%;
+    text-align: center;
+
+    &:last-child {
+      width: 10%;
+    }
+
+    .modal-select {
+      width: 75%;
+    }
+
+    a {
+      font-size: 1.2rem;
+    }
+  }
+
+  .btn-modal {
+    padding: 1rem 1.5rem;
+    color: $cor-branca;
+    border: none;
+    cursor: pointer;
+    
+    @include botao($cor-primaria);
+  }
+}

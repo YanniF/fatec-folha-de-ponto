@@ -1,0 +1,40 @@
+$fonte: 'Roboto', sans-serif;
+
+$cor-primaria: #4CAF50;
+$cor-clara: #d9d9d9;
+$cor-texto: #282723;
+$cor-oposta: #f7f7f7;
+
+$cor-preta: #000;
+$cor-branca: #fff;
+
+$cor-btn-editar: #17a2b8;
+$cor-btn-apagar: #dc3545;
+$cor-btn-imprimir: #563d7c;
+
+$bp-grande: 62.5em;     // 1000px
+$bp-medio: 50em;        // 800px
+$bp-pequeno: 37.5em;    // 600px
+
+@mixin botao ($cor) {
+  background-color: $cor;
+
+  &:hover {
+    background-color: darken($cor, 10%);
+  }
+}
+
+@mixin form-input() {
+  padding: .5rem 1rem;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  border: 1px solid $cor-clara;
+  border-radius: 3px;
+
+  &:focus {
+    border-color: $cor-primaria;
+    box-shadow: 0 0 3px $cor-primaria;
+    outline: none;
+  }
+}

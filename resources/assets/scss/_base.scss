@@ -1,0 +1,101 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;  
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+
+  @media only screen and (max-width: $bp-medio) {
+    font-size: 50%;
+  }
+}
+
+body {
+  box-sizing: inherit;
+  background-image: linear-gradient(to left, rgba($cor-oposta, .5), rgba($cor-oposta, .5)), url(../img/doodles.png);
+  font-family: $fonte;
+  color: $cor-texto;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  margin: 4rem 0;
+
+  @media only screen and (max-width: $bp-medio) {
+    img:nth-child(3) {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: $bp-pequeno) {
+    img:nth-child(2) {
+      display: none;
+    }
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+main {
+  h1 {
+    margin: 2rem 0;
+    font-size: 3.5rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin: 2rem 0;
+    font-size: 2rem;
+  }
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+  p {
+    font-size: 1.4rem;
+
+    a {
+      position: relative;
+      color: currentColor;
+      text-decoration: none;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 50%;
+        bottom: -2px;
+        left: 0;
+        border-bottom: 1px solid currentColor;
+        transition: width .2s linear;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// modal
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s .3s, opacity .3s ease-out;
+}
+
+.flex {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .3s ease-in;
+}
