@@ -5,15 +5,18 @@ let pagina = (window.location.pathname); // pega o endereço
 if (pagina.includes('impressao')) {
   carregarPesquisar();
 }
-else if(pagina.includes('adm') || pagina.includes('feriado')) {
+else if(pagina.includes('adm') || pagina.includes('feriado') || pagina.includes('prof')) {
   carregarModal();
   carregarPesquisar();
+  alerta();
 }
 
-if(pagina.includes('prof')) {
-  carregarModal();
-  carregarPesquisar();
+if(pagina.includes('prof') && !pagina.includes('impressao')) {
   alterarTabela();
+}
+
+if (pagina.includes('exibir')) {
+  mostrarModal();
 }
 
 
@@ -55,20 +58,13 @@ function carregarModal() {
   
   const modal = document.getElementById('modal-wrapper');
 
-  document.getElementById('btnMostrarModal').addEventListener('click', function() {
-    modal.classList.add('flex');
-    modal.classList.remove('hidden');
-  });
+  document.getElementById('btnMostrarModal').addEventListener('click', mostrarModal);
   
-  document.querySelector('.btn-fechar').addEventListener('click', function() {
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-  });
+  document.querySelector('.btn-fechar').addEventListener('click', esconderModal);
   
   modal.addEventListener('click', function(e) {
     if(e.target === modal) {
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
+      esconderModal();
     }    
   });
 }
@@ -118,7 +114,33 @@ function alterarTabela() {
     // melhorar isso aqui
     else if(alvo.parentElement.className.baseVal  == 'svg-inline--fa fa-trash-alt fa-w-14') {
       alvo.parentElement.parentElement.parentElement.parentElement.remove(); // dai me forças
-    }
-    
+    }    
   });
+}
+
+function mostrarModal() {
+  const modal = document.getElementById('modal-wrapper');
+
+  modal.classList.add('flex');
+  modal.classList.remove('hidden');
+}
+
+function esconderModal() {
+  const modal = document.getElementById('modal-wrapper');
+
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+
+  if (pagina.includes('exibir')) {
+    const p = pagina.split('/');
+    window.location.href = "/" + p[1];
+  }
+}
+
+function alerta() {
+  if(document.querySelector('.alerta')) {
+    setTimeout(function() {
+      document.querySelector('.alerta').remove();
+    }, 2500);
+  }    
 }

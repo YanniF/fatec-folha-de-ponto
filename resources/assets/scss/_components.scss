@@ -1,7 +1,6 @@
-// botões
+//--- botões ---//
 .btn {
   padding: 1rem 1.5rem;
-  color: $cor-oposta;
   background-color: $cor-primaria;
   border: none;
   border-radius: 3px;
@@ -49,7 +48,25 @@
   }
 }
 
-// pesquisar
+//--- alert ---//
+.alerta {
+  width: 95%;
+  margin: 2rem auto;
+  padding: 1rem 2.5rem;
+  border-radius: 3px;
+  text-align: left;
+
+  &-sucesso {
+    @include alerta($cor-primaria);  
+  }
+
+  &-erro {
+    @include alerta($cor-btn-apagar);  
+  }
+}
+
+
+//--- pesquisar ---//
 main {
   position: relative;
 
@@ -62,7 +79,7 @@ main {
     &-input{
       @include form-input();
       position: relative;
-      width: 2rem;
+      width: 4.2rem;
       top:0;
       right:0;
       border-color: $cor-primaria;
@@ -89,7 +106,7 @@ main {
   }
 }
 
-// tabela 
+//--- tabela ---//
 main {
   table {
     width: 95%;
@@ -119,7 +136,7 @@ main {
   }
 }
 
-// modal
+//--- modal ---//
 .modal-wrapper {
   @extend .hidden;
   display: flex;
@@ -229,30 +246,11 @@ main {
   }
 
   &-input,
-  &-select-info {
+  &-select {
     width: 70%;
 
     @media only screen and (max-width: $bp-pequeno) {
       width: 90%;
-    }
-  }
-
-  &-data { // feriado
-    display: flex;
-    justify-content: space-between;
-    width: 74%;
-
-    @media only screen and (max-width: $bp-pequeno) {
-      width: 95%;
-    }
-
-    & > *  {
-      width: 33.33%;
-      margin-right: 1rem;
-    }
-
-    & > :last-child {
-      margin-right: 0;
     }
   }
   

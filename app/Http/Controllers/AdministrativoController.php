@@ -3,86 +3,72 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Administrativo;
 
 class AdministrativoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('adm.index');
-    }
+  private function validar(Request $req) {
+    $req->validate([
+      'nome' => 'required',
+      'rg' => 'required',
+      'cargo' => 'required',
+      'jornada' => 'required',
+      'horario' => 'required',
+      'intervalo' => 'required'
+    ]);
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+  public function index()
+  {
+    $adms = Administrativo::all();
+    return view('adm.index')->with('adms', $adms);
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  public function cadastrar(Request $req)
+  {
+    $this->validar($req);
+    $params = $req->all();
+    
+    $req->has('plantao') ? $params['plantao'] = true : $params['plantao'] = false;
+    $req->has('estudante') ? $params['estudante'] = true : $params['estudante'] = false;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    $adms = new Administrativo($params);
+    $adms->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    return redirect()->action('AdministrativoController@index')->withInput();
+  }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+  public function exibir($id)
+  {
+    $adm = Administrativo::find($id);
+    $adms = Administrativo::all();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    return view('adm.index')->with(array('adm' => $adm, 'adms' => $adms));
+  }
 
-    public function print() {
-        return view('adm.impressao');
-    }
+  public function editar($id, Request $req)
+  {
+    $this->validar($req);
+    $adm = Administrativo::findOrFail($id);
+    $params = $req->all();
+
+    $req->has('plantao') ? $params['plantao'] = true : $params['plantao'] = false;
+    $req->has('estudante') ? $params['estudante'] = true : $params['estudante'] = false;
+
+    $adm->fill($params)->save();
+
+    return redirect()->action('AdministrativoController@index')->withInput();
+  }
+  
+  public function excluir($id)
+  {
+    $feriados = new Administrativo();
+    $feriados = Administrativo::destroy($id);
+    return redirect()->action('AdministrativoController@index')->withInput();
+  }
+
+  public function print() {
+    $adms = Administrativo::all();
+    return view('adm.impressao')->with('adms', $adms);
+  }
 }

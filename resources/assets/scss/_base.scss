@@ -15,7 +15,7 @@ html {
 }
 
 body {
-  box-sizing: inherit;
+  box-sizing: border-box;
   background-image: linear-gradient(to left, rgba($cor-oposta, .5), rgba($cor-oposta, .5)), url(../img/doodles.png);
   font-family: $fonte;
   color: $cor-texto;

@@ -17,11 +17,18 @@ $bp-medio: 50em;        // 800px
 $bp-pequeno: 37.5em;    // 600px
 
 @mixin botao ($cor) {
+  color: $cor-oposta;
   background-color: $cor;
 
   &:hover {
     background-color: darken($cor, 10%);
   }
+}
+
+@mixin alerta($cor) {
+  background-color: $cor;
+  color: $cor-oposta;
+  border: 1px solid darken($cor, 10%);
 }
 
 @mixin form-input() {

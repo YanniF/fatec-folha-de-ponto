@@ -13,38 +13,20 @@
         <tr>
           <th>Nome</th>
           <th>Cargo</th>
-          <th>Departamento</th>
           <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
+      @foreach($adms as $a)
         <tr class="tabela-item">
-          <td>Yanni Fraga</td>
-          <td>Auxiliar decente 😎</td>
-          <td>DTI</td>
+          <td>{{$a->nome}}</td>
+          <td>{{$a->cargo}}</td>
           <td>
             <a href="#" class="btn btn-imprimir" title="Imprimir folha de ponto"><i class="fas fa-print"></i></a>
             <a href="#" class="btn btn-gerarDoc" title="Alterar folha manualmente"><i class="far fa-file-alt"></i></a>
           </td>
         </tr>
-        <tr class="tabela-item">
-          <td>André Ceratti</td>
-          <td>Estagiário eterno</td>
-          <td>DTI</td>
-          <td>
-            <a href="#" class="btn btn-imprimir" title="Imprimir folha de ponto"><i class="fas fa-print"></i></a>
-            <a href="#" class="btn btn-gerarDoc" title="Alterar folha manualmente"><i class="far fa-file-alt"></i></a>
-          </td>
-        </tr>
-        <tr class="tabela-item">
-          <td>Maria Teresa</td>
-          <td>Moça do RH</td>
-          <td>DP</td>
-          <td>
-            <a href="#" class="btn btn-imprimir" title="Imprimir folha de ponto"><i class="fas fa-print"></i></a>
-            <a href="#" class="btn btn-gerarDoc" title="Alterar folha manualmente"><i class="far fa-file-alt"></i></a>
-          </td>
-        </tr>
+      @endforeach
       </tbody>
     </table>
     <a href="{{ url('/') }}" class="btn btn-voltar" title="Voltar"><i class="fas fa-arrow-left"></i></a>

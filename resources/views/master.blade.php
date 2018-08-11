@@ -12,7 +12,7 @@
 <body>
   <div class="container">
     <header>
-      <img src="{{ asset('img/logoFatec.png') }}" alt="Fatec PG">
+      <a href="{{url('/')}}"><img src="{{ asset('img/logoFatec.png') }}" alt="Fatec PG"></a>  
       <img src="{{ asset('img/logoCPS.png') }}" alt="Centro Paula Souza">
       <img src="{{ asset('img/logoGoverno.png') }}" alt="Governo do Estado de São Paulo">
     </header>

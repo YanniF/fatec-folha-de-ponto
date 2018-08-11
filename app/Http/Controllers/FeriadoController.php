@@ -3,82 +3,57 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Models\Feriado;
 
 class FeriadoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('feriado.index');
-    }
+  private function validar(Request $req) {
+    $req->validate([
+      'nome' => 'required|max:150',
+      'data' => 'required',
+      'informacao' => 'required|max:50'
+    ]);
+  }
+  
+  public function index()
+  {
+    $feriados = Feriado::all();
+    return view('feriado.index')->with('feriados', $feriados);
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+  public function cadastrar(Request $req)
+  {
+    $this->validar($req);
+    $params = $req->all();
+    $feriados = new Feriado($params);
+    $feriados->save();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    return redirect()->action('FeriadoController@index')->withInput();
+  }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+  public function exibir($id)
+  {
+    $f = Feriado::find($id);
+    $feriados = Feriado::all();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    return view('feriado.index')->with(array('f' => $f, 'feriados' => $feriados));
+  }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+  public function editar($id, Request $req)
+  {
+    $this->validar($req);
+    $feriado = Feriado::findOrFail($id);
+    $params = $req->all();
+    $feriado->fill($params)->save();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    return redirect()->action('FeriadoController@index')->withInput();
+  }
+
+  public function excluir($id)
+  {
+    $feriados = new Feriado();
+    $feriados = Feriado::destroy($id);
+    return redirect()->action('FeriadoController@index')->withInput();
+  }
 }
