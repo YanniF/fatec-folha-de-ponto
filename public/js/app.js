@@ -32,9 +32,13 @@ function carregarPesquisar() {
     pesquisarInput.focus();
   });
 
-  // clica fora do input, limpa o campo
+  // clica fora do input, limpa o campo, e volta a exibir todas as linhas da tabela
   pesquisarInput.addEventListener('blur', function() {
     pesquisarInput.value = "";
+
+    document.querySelectorAll('.tabela-item').forEach((linha) => {
+      linha.style.display = 'table-row';
+    })
   });
 
   // a cada tecla pressionada, vai verificar se existe aquele conjunto de caracteres na 1ª célula da linha
@@ -82,20 +86,20 @@ function alterarTabela() {
 
     linha.innerHTML = `
       <td>
-        <select name="dia" id="dia" class="modal-select">
-          <option value="2">Seg.</option>
-          <option value="3">Ter.</option>
-          <option value="4">Qua.</option>
-          <option value="5">Qui.</option>
-          <option value="6">Sex.</option>
-          <option value="7">Sab.</option>
+        <select name="dia[]" id="dia" class="modal-select">
+          <option value="Seg">Seg</option>
+          <option value="Ter">Ter</option>
+          <option value="Qua">Qua</option>
+          <option value="Qui">Qui</option>
+          <option value="Sex">Sex</option>
+          <option value="Sab">Sab</option>
         </select>
       </td>
       <td>
-        <input type="time" class="modal-input" name="entrada" placeholder="00:00">
+        <input type="time" class="modal-input" name="entrada[]" placeholder="00:00">
       </td>
       <td>
-        <input type="time" class="modal-input" name="saida" placeholder="00:00">
+        <input type="time" class="modal-input" name="saida[]" placeholder="00:00">
       </td>
       <td>
         <a href="#" class="btn btn-apagar delete" title="Apagar horário"><i class="fas fa-trash-alt"></i></a>

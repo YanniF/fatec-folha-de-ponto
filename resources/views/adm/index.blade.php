@@ -92,11 +92,11 @@
           </div> 
           <div class="form-group">
             <input type="submit" value="{{ isset($adm) ? 'Salvar' : 'Cadastrar' }}" class="btn btn-modal">
-            @if(isset($adm))
-              <input type="button" value="Cancelar" class="btn btn-modal" onclick="esconderModal()">
-            @else
+          @if(isset($adm))
+            <input type="button" value="Cancelar" class="btn btn-modal" onclick="esconderModal()">
+          @else
             <input type="reset" value="Limpar" class="btn btn-modal">
-            @endif            
+          @endif            
           </div>
         </form>
       </div>

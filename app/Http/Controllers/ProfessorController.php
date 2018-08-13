@@ -3,86 +3,81 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Professor;
 
 class ProfessorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('prof.index');
-    }
+  private function validar(Request $req) {
+    $req->validate([
+      'nome' => 'required',
+      'categoria' => 'required',
+      'projeto' => 'required',
+      'funcao' => 'required',
+      'curso' => 'required',
+      'carga' => 'required',
+      'dia' => 'required',
+      'entrada' => 'required',
+      'saida' => 'required',
+    ]);
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+  public function index()
+  {
+    $profs = Professor::all();
+    return view('prof.index')->with('profs', $profs);
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  public function cadastrar(Request $req)
+  {
+    $this->validar($req);
+    $params = $req->all();
+    
+    $params['dia'] = implode(";", $params['dia']);
+    $params['entrada'] = implode(";", $params['entrada']);
+    $params['saida'] = implode(";", $params['saida']);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    $profs = new Professor($params);
+    $profs->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    return redirect()->action('ProfessorController@index')->withInput();
+  }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+  public function exibir($id)
+  {
+    $prof = Professor::find($id);
+    $profs = Professor::all();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    $prof['dia'] = explode(";", $prof['dia']);
+    $prof['entrada'] = explode(";", $prof['entrada']);
+    $prof['saida'] = explode(";", $prof['saida']);
 
-    public function print() {
-        return view('prof.impressao');
-    }
+    return view('prof.index')->with(array('prof' => $prof, 'profs' => $profs));
+  }
+
+  public function editar(Request $req, $id)
+  {
+    $this->validar($req);
+
+    $prof = Professor::findOrFail($id);
+    $params = $req->all();
+
+    $params['dia'] = implode(";", $params['dia']);
+    $params['entrada'] = implode(";", $params['entrada']);
+    $params['saida'] = implode(";", $params['saida']);
+    
+    $prof->fill($params)->save();
+
+    return redirect()->action('ProfessorController@index')->withInput();
+  }
+
+  public function excluir($id)
+  {
+    $profs = new Professor();
+    $profs = Professor::destroy($id);
+    return redirect()->action('ProfessorController@index')->withInput();
+  }
+
+  public function print() {
+    return view('prof.impressao');
+  }
 }
