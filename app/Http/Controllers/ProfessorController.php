@@ -78,6 +78,7 @@ class ProfessorController extends Controller
   }
 
   public function print() {
-    return view('prof.impressao');
+    $profs = Professor::all();
+    return view('prof.impressao')->with('profs', $profs);
   }
 }

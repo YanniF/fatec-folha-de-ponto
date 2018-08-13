@@ -26,9 +26,9 @@ $bp-pequeno: 37.5em;    // 600px
 }
 
 @mixin alerta($cor) {
-  background-color: $cor;
-  color: $cor-oposta;
-  border: 1px solid darken($cor, 10%);
+  background-color: lighten($cor, 30%);
+  color: $cor;
+  border: 1px solid $cor;
 }
 
 @mixin form-input() {

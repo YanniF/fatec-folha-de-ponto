@@ -9,7 +9,7 @@
       <span id="pesquisar-icon"><i class="fas fa-search"></i></span>
     </div>
     @if(old('nome'))
-    <div class="alerta alerta-sucesso"><p>Informações salvas</p></div>
+    <div class="alerta alerta-sucesso"><p><i class="fas fa-check"></i> Informações salvas</p></div>
     @endif
     @if ($errors->any())
       <div class="alerta alerta-erro">

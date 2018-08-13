@@ -18,30 +18,16 @@
         </tr>
       </thead>
       <tbody>
+      @foreach($profs as $p)
         <tr class="tabela-item">
-          <td>Professor Pasquale</td>
-          <td>Um projeto super interessante 😎</td>
+          <td>{{ $p->nome }}</td>
+          <td>{{ $p->projeto }}</td>
           <td>
             <a href="#" class="btn btn-imprimir" title="Imprimir folha de ponto"><i class="fas fa-print"></i></a>
             <a href="#" class="btn btn-gerarDoc" title="Alterar folha manualmente"><i class="far fa-file-alt"></i></a>
           </td>
         </tr>
-        <tr class="tabela-item">
-          <td>Professor Girafales</td>
-          <td>Projeto de gestão de projetos</td>
-          <td>
-            <a href="#" class="btn btn-imprimir" title="Imprimir folha de ponto"><i class="fas fa-print"></i></a>
-            <a href="#" class="btn btn-gerarDoc" title="Alterar folha manualmente"><i class="far fa-file-alt"></i></a>
-          </td>
-        </tr>
-        <tr class="tabela-item">
-          <td>Mussum Ipsum</td>
-          <td>Cacilds vidis litro abertis</td>
-          <td>
-            <a href="#" class="btn btn-imprimir" title="Imprimir folha de ponto"><i class="fas fa-print"></i></a>
-            <a href="#" class="btn btn-gerarDoc" title="Alterar folha manualmente"><i class="far fa-file-alt"></i></a>
-          </td>
-        </tr>
+      @endforeach
       </tbody>
     </table>
     <a href="{{ url('/') }}" class="btn btn-voltar" title="Voltar"><i class="fas fa-arrow-left"></i></a>
