@@ -1,0 +1,102 @@
+@import "variaveis";
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  font-weight: bold;
+  margin: 2em; 
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+}
+
+.header-imagem {
+  width: 20%;
+  padding: 5px 0;
+  text-align: center;
+  border-right: 1px solid #000;
+
+  img {
+    height: 90px;
+  }
+}
+
+.header-texto {
+  width: 80%;
+  text-align: center;
+
+  p {
+    margin: 5px;
+  }
+
+  p:last-child {
+    margin-top: 15px;
+  }
+}
+
+.info-adm {
+  margin: 8px 0;
+}
+
+.row {
+  display: flex;
+
+  p {
+    width: 70%;
+    margin: 0;
+  }
+
+  p:nth-child(2) {
+    width: 30%;
+  }
+}
+
+table, 
+tr,
+th,
+td {
+  border: 1px solid #000;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 9pt;
+}
+
+td {
+  padding: 3px;
+}
+
+.assinatura {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 60px;
+  font-weight: normal;
+
+  p {
+    margin: 0;
+  }
+}
+
+// print
+@media print {
+  @page {
+    size:  auto;   /* auto is the initial value */
+    margin: 0mm;  /* this affects the margin in the printer settings */
+  }
+  
+  html {
+    background-color: #fff; 
+    margin: 0;  /* this affects the margin on the html before sending to printer */
+  }
+
+  .assinatura {
+    page-break-after: always;
+  }
+}

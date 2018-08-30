@@ -146,5 +146,5 @@ function alerta() {
     setTimeout(function() {
       document.querySelector('.alerta').remove();
     }, 2500);
-  }    
+  }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Administrativo;
+use App\Models\Feriado;
+use Carbon\Carbon;
 
 class AdministrativoController extends Controller
 {
@@ -67,8 +69,15 @@ class AdministrativoController extends Controller
     return redirect()->action('AdministrativoController@index')->withInput();
   }
 
-  public function print() {
-    $adms = Administrativo::all();
-    return view('adm.impressao')->with('adms', $adms);
+  public function print($mes, $ano, $id) {
+
+    setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+    // $data = strftime('%A, %d de %B de %Y', strtotime('today'));
+    // return view('adm.impressao')->with('adms', $adms);
+  
+    $adm = Administrativo::find($id);
+    $feriados = Feriado::select('data', 'informacao')->where('data', 'like', '%-' . $mes . '-%')->get(); // selecionando todos os feriados daquele mês
+    
+    return view('adm.imprimir')->with(array('adm' => $adm, 'feriados' => $feriados, 'mes' => $mes, 'ano' => $ano));
   }
 }
