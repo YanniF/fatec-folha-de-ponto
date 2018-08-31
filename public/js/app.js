@@ -173,15 +173,16 @@ function irParaImpressao() {
 
   botaoModalImprimir.addEventListener('click', function() {
     const dataId = botaoModalImprimir.dataset.id;
-    
+    const p = pagina.split('/');
+
     // adm/imprimir/08/2018/2
     if(dataId == 0) {
       botaoModalImprimir.setAttribute('href',  
-        `/adm/imprimirtudo/${document.getElementById('mes').value}/${document.getElementById('ano').value}`);
+        `/${p[1]}/imprimirtudo/${document.getElementById('mes').value}/${document.getElementById('ano').value}`);
     }
     else {
       botaoModalImprimir.setAttribute('href', 
-        `/adm/imprimir/${document.getElementById('mes').value}/${document.getElementById('ano').value}/${botaoModalImprimir.dataset.id}`);
+        `/${p[1]}/imprimir/${document.getElementById('mes').value}/${document.getElementById('ano').value}/${botaoModalImprimir.dataset.id}`);
     }
   })
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Professor;
+use App\Models\Feriado;
 
 class ProfessorController extends Controller
 {
@@ -77,8 +78,30 @@ class ProfessorController extends Controller
     return redirect()->action('ProfessorController@index')->withInput();
   }
 
-  public function print() {
+  public function impressao() {
+    setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+
     $profs = Professor::all();
     return view('prof.impressao')->with('profs', $profs);
+  }
+
+  public function imprimir($mes, $ano, $id) {
+
+    setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+  
+    $prof = Professor::find($id);
+    $feriados = Feriado::select('data', 'informacao')->where('data', 'like', '%-' . $mes . '-%')->get();
+    
+    return view('prof.imprimir')->with(array('prof' => $prof, 'feriados' => $feriados, 'mes' => $mes, 'ano' => $ano));
+  }
+
+  public function imprimirTudo($mes, $ano) {
+
+    setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+  
+    $profs = Professor::all();
+    $feriados = Feriado::select('data', 'informacao')->where('data', 'like', '%-' . $mes . '-%')->get();
+        
+    return view('prof.imprimirtudo')->with(array('profs' => $profs, 'feriados' => $feriados, 'mes' => $mes, 'ano' => $ano));
   }
 }

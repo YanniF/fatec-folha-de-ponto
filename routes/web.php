@@ -21,7 +21,10 @@ Route::post('prof/cadastrar', 'ProfessorController@cadastrar');
 Route::get('prof/exibir/{id}', 'ProfessorController@exibir');
 Route::post('prof/editar/{id}', 'ProfessorController@editar');
 Route::get('prof/excluir/{id}', 'ProfessorController@excluir');
-Route::get('prof/impressao', 'ProfessorController@print');
+
+Route::get('prof/impressao', 'ProfessorController@impressao');
+Route::get('prof/imprimirtudo/{mes}/{ano}', 'ProfessorController@imprimirTudo');
+Route::get('prof/imprimir/{mes}/{ano}/{id}', 'ProfessorController@imprimir');
 
 // Feriado
 Route::get('feriado', 'FeriadoController@index');

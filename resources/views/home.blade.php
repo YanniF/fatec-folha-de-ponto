@@ -13,7 +13,7 @@
     <section class="prof-home">
       <h2>Professores</h2>
       <a href="{{ action('ProfessorController@index') }}" class="btn btn-home" title="Cadastre ou edite professores"><i class="fas fa-user"></i> Cadastro</a>
-      <a href="{{ action('ProfessorController@print') }}" class="btn btn-home" title="Folha de ponto dos professores"><i class="fas fa-print"></i> Impressão</a>
+      <a href="{{ action('ProfessorController@impressao') }}" class="btn btn-home" title="Folha de ponto dos professores"><i class="fas fa-print"></i> Impressão</a>
     </section>
     </div>      
     <section class="feriado-home">
