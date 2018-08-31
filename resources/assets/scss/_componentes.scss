@@ -1,7 +1,6 @@
 //--- botões ---//
 .btn {
   padding: 1rem 1.5rem;
-  background-color: $cor-primaria;
   border: none;
   border-radius: 3px;
   text-decoration: none;
@@ -19,8 +18,15 @@
     @include botao($cor-clara);
   }
 
+  &-imprimir-tudo  {
+    right: 3%;
+  
+    @include botao($cor-btn-editar); 
+  }
+
   &-cadastrar,
-  &-voltar {
+  &-voltar,
+  &-imprimir-tudo {
     position: fixed;
     font-size: 3.5rem;
     bottom: 3%;
@@ -41,10 +47,6 @@
 
   &-imprimir {
     @include botao($cor-btn-imprimir);  
-  }
-
-  &-gerarDoc {
-    @include botao($cor-btn-editar);  
   }
 }
 

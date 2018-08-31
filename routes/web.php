@@ -11,8 +11,9 @@ Route::get('adm/exibir/{id}', 'AdministrativoController@exibir');
 Route::post('adm/editar/{id}', 'AdministrativoController@editar');
 Route::get('adm/excluir/{id}', 'AdministrativoController@excluir');
 
-// Route::get('adm/impressao', 'AdministrativoController@print');
-Route::get('adm/impressao/{mes}/{ano}/{id}', 'AdministrativoController@print');
+Route::get('adm/impressao', 'AdministrativoController@impressao');
+Route::get('adm/imprimirtudo/{mes}/{ano}', 'AdministrativoController@imprimirTudo');
+Route::get('adm/imprimir/{mes}/{ano}/{id}', 'AdministrativoController@imprimir');
 
 // Professores
 Route::get('prof', 'ProfessorController@index');

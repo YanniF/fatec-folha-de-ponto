@@ -4,6 +4,7 @@ let pagina = (window.location.pathname); // pega o endereço
 // carrega os eventos dependendo do que a página usa
 if (pagina.includes('impressao')) {
   carregarPesquisar();
+  irParaImpressao();
 }
 else if(pagina.includes('adm') || pagina.includes('feriado') || pagina.includes('prof')) {
   carregarModal();
@@ -73,11 +74,30 @@ function carregarModal() {
   });
 }
 
+function mostrarModal() {
+  const modal = document.getElementById('modal-wrapper');
+
+  modal.classList.add('flex');
+  modal.classList.remove('hidden');
+}
+
+function esconderModal() {
+  const modal = document.getElementById('modal-wrapper');
+
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+
+  if (pagina.includes('exibir')) {
+    const p = pagina.split('/');
+    window.location.href = "/" + p[1];
+  }
+}
+
 function alterarTabela() {
   
   const btnAddLinha = document.getElementById('btnAddLinha');
   const tbody = document.getElementById('horario');
-  const btnApagarLinha = document.querySelector('.delete');
+  // const btnApagarLinha = document.querySelector('.delete');
   
   btnAddLinha.addEventListener('click', function(e) {
     
@@ -122,29 +142,46 @@ function alterarTabela() {
   });
 }
 
-function mostrarModal() {
-  const modal = document.getElementById('modal-wrapper');
-
-  modal.classList.add('flex');
-  modal.classList.remove('hidden');
-}
-
-function esconderModal() {
-  const modal = document.getElementById('modal-wrapper');
-
-  modal.classList.add('hidden');
-  modal.classList.remove('flex');
-
-  if (pagina.includes('exibir')) {
-    const p = pagina.split('/');
-    window.location.href = "/" + p[1];
-  }
-}
-
 function alerta() {
   if(document.querySelector('.alerta')) {
     setTimeout(function() {
       document.querySelector('.alerta').remove();
     }, 2500);
   }
+}
+
+function irParaImpressao() {
+  
+  const botaoModalImprimir = document.getElementById('irImpressao');
+  const botoesImprimir = document.querySelectorAll('.btn-imprimir');
+  const botaImprimirTudo = document.getElementById('btnMostrarModal');
+
+  // passa o código para o botão do modal 
+  Array.from(botoesImprimir).forEach(botao => {
+
+    botao.addEventListener('click', function() {
+      botaoModalImprimir.dataset.id = botao.dataset.id;
+    });    
+  });
+
+  // se for para imprimir todos, o data-id será 0
+  botaImprimirTudo.addEventListener('click', function() {
+    botaoModalImprimir.dataset.id = botaImprimirTudo.dataset.id;
+  });
+
+  carregarModal();
+
+  botaoModalImprimir.addEventListener('click', function() {
+    const dataId = botaoModalImprimir.dataset.id;
+    
+    // adm/imprimir/08/2018/2
+    if(dataId == 0) {
+      botaoModalImprimir.setAttribute('href',  
+        `/adm/imprimirtudo/${document.getElementById('mes').value}/${document.getElementById('ano').value}`);
+    }
+    else {
+      botaoModalImprimir.setAttribute('href', 
+        `/adm/imprimir/${document.getElementById('mes').value}/${document.getElementById('ano').value}/${botaoModalImprimir.dataset.id}`);
+    }
+  })
 }

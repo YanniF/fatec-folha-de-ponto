@@ -69,7 +69,14 @@ class AdministrativoController extends Controller
     return redirect()->action('AdministrativoController@index')->withInput();
   }
 
-  public function print($mes, $ano, $id) {
+  public function impressao() {
+    setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+
+    $adms = Administrativo::all();
+    return view('adm.impressao')->with('adms', $adms);
+  }
+
+  public function imprimir($mes, $ano, $id) {
 
     setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     // $data = strftime('%A, %d de %B de %Y', strtotime('today'));
@@ -79,5 +86,15 @@ class AdministrativoController extends Controller
     $feriados = Feriado::select('data', 'informacao')->where('data', 'like', '%-' . $mes . '-%')->get(); // selecionando todos os feriados daquele mês
     
     return view('adm.imprimir')->with(array('adm' => $adm, 'feriados' => $feriados, 'mes' => $mes, 'ano' => $ano));
+  }
+
+  public function imprimirTudo($mes, $ano) {
+
+    setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+  
+    $adms = Administrativo::all();
+    $feriados = Feriado::select('data', 'informacao')->where('data', 'like', '%-' . $mes . '-%')->get(); // selecionando todos os feriados daquele mês
+        
+    return view('adm.imprimirtudo')->with(array('adms' => $adms, 'feriados' => $feriados, 'mes' => $mes, 'ano' => $ano));
   }
 }

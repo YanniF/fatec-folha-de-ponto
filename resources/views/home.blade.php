@@ -8,7 +8,7 @@
     <section class="adm-home">
       <h2>Administrativos</h2>
       <a href="{{ action('AdministrativoController@index') }}" class="btn btn-home" title="Cadastre ou edite funcionários"><i class="fas fa-user"></i> Cadastro</a>
-      <a href="{{ action('AdministrativoController@print') }}" class="btn btn-home" title="Folha de ponto dos funcionários"><i class="fas fa-print"></i> Impressão</a>
+      <a href="{{ action('AdministrativoController@impressao') }}" class="btn btn-home" title="Folha de ponto dos funcionários"><i class="fas fa-print"></i> Impressão</a>
     </section>
     <section class="prof-home">
       <h2>Professores</h2>

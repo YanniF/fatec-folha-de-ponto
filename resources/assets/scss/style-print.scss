@@ -7,11 +7,43 @@ body {
   margin: 2em; 
 }
 
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: all .3s;
+
+  &-voltar,
+  &-imprimir {
+    position: fixed;
+    font-size: 35px;
+    top: 3%;
+    z-index: 100;
+  }
+
+  &-voltar {
+    left: 3%;
+  
+    @include botao($cor-clara);
+  }
+
+  &-imprimir {
+    right: 3%;
+  
+    @include botao($cor-btn-editar);
+  }
+}
+
 header {
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid #000;
+
+  &:not(:first-child) {
+    margin-top: 5mm;
+  }
 }
 
 .header-imagem {
@@ -84,18 +116,29 @@ td {
   }
 }
 
-// print
+// folha de estilos para impressão
 @media print {
   @page {
-    size:  auto;   /* auto is the initial value */
-    margin: 0mm;  /* this affects the margin in the printer settings */
+    size:  auto;   // auto is the initial value
+    margin: 0mm;  // this affects the margin in the printer settings
   }
   
   html {
     background-color: #fff; 
-    margin: 0;  /* this affects the margin on the html before sending to printer */
+    margin: 0;  // this affects the margin on the html before sending to printer
   }
 
+  body {
+    margin: 0 5mm 5mm; // margin you want for the content
+  }
+
+  .btn {
+    display: none;
+  }
+
+  header {
+    margin-top: 5mm;
+  }
   .assinatura {
     page-break-after: always;
   }

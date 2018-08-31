@@ -33,7 +33,7 @@
   <a href="{{ url('/adm/impressao') }}" class="btn btn-voltar" title="Voltar"><i class="fas fa-arrow-left"></i></a>
   <a href="javascript:window.print()" id="btnImprimirFolha" class="btn btn-imprimir" title="Imprimir folha de ponto"><i class="fas fa-print"></i></a>
   <div class="container">  
-    
+    @foreach($adms as $adm)
     <?php $data = Carbon::createFromDate($ano, $mes, 1); ?>
     <header>
       <div class="header-imagem">
@@ -111,6 +111,7 @@
         <p>Data ____/____/____</p>
       </div>
     </div>
+    @endforeach
   </div>
 
   <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
