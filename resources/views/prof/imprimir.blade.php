@@ -1,20 +1,17 @@
 <?php
   use Carbon\Carbon;
+  setlocale (LC_TIME, 'pt_BR');
 
   function imprimirInfo($data, $feriados) {
-    if($data->dayOfWeek == 6) {
-      return 'SÁBADO';
-    }
-    else if($data->dayOfWeek == 0) {
-      return 'DOMINGO';
-    }
-    else if($feriados != null) {
+    
+    if($feriados != null) {
       foreach ($feriados as $feriado) {
         if($data->toDateString() == $feriado->data) {
           return $feriado->informacao;
         }
       }
     }
+    
     return '';     
   }
 ?>
@@ -67,7 +64,7 @@
     <table>
       <thead>
         <tr>
-          <th rowspan="2">Dia</th>
+          <th rowspan="2" colspan="2">Dia</th>
           <th colspan="2">Entrada</th>
           <th colspan="2">Saída</th>
           <th rowspan="2">Observações</th>
@@ -80,20 +77,37 @@
         </tr>
         <tbody>
           <?php
-            // for($c = 1; $c <= $data->daysInMonth; $c++) {
+            for($c = 1; $c <= $data->daysInMonth; $c++) {
               
-            //   echo '<tr>';
-            //   echo '<td>' . $data->day . '</td>';
-            //   echo '<td></td>';
-            //   echo '<td>' . imprimirInfo($data, $feriados) . '</td>';
-            //   echo '<td></td>';
-            //   echo '<td>' . imprimirInfo($data, $feriados) . '</td>';
-            //   echo '<td> </td>';
-            //   echo '</tr>';
-
-            //   if($data->day != $data->daysInMonth)
-            //     $data = $data->addDay();
-            // }
+              for($i = 1; $i < count($prof->dia); $i++) {
+                if(strtolower($prof->dia[$i]) == $data->formatLocalized('%a')) {
+                  echo '<tr>';
+                  echo '<td>' . $data->day . '</td>';
+                  echo '<td>' . $prof->dia[$i] . '</td>';
+                  echo '<td>' . $prof->entrada[$i] . '</td>';
+                  echo '<td>' . imprimirInfo($data, $feriados) . '</td>';
+                  echo '<td>' . $prof->saida[$i] . '</td>';
+                  echo '<td>' . imprimirInfo($data, $feriados) . '</td>';
+                  echo '<td></td>';
+                  echo '</tr>';
+                }
+              }
+              if($data->dayOfWeek == 0) {
+                echo 
+                '<tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>DOMINGO</td> 
+                  <td></td>
+                  <td>DOMINGO</td> 
+                  <td></td>
+                </tr>';
+              }          
+              
+              if($data->day != $data->daysInMonth) 
+                $data = $data->addDay();
+            }             
           ?>
         </tbody>
       </thead>

@@ -70,21 +70,29 @@ header {
   }
 }
 
-.info-prof,
 .info-adm {
   margin: 8px 0;
+}
+
+.info-prof {
+  margin: 14px 0;
+  
+  .row p{
+    line-height: 1.4;
+   }
 }
 
 .row {
   display: flex;
 
   p {
-    width: 70%;
+    width: 68%;
     margin: 0;
   }
 
   p:nth-child(2) {
     width: 30%;
+    margin-left: 2%;
   }
 }
 

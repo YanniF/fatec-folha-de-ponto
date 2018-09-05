@@ -22,14 +22,12 @@ class ProfessorController extends Controller
     ]);
   }
 
-  public function index()
-  {
+  public function index() {
     $profs = Professor::all();
     return view('prof.index')->with('profs', $profs);
   }
 
-  public function cadastrar(Request $req)
-  {
+  public function cadastrar(Request $req) {
     $this->validar($req);
     $params = $req->all();
     
@@ -43,8 +41,7 @@ class ProfessorController extends Controller
     return redirect()->action('ProfessorController@index')->withInput();
   }
 
-  public function exibir($id)
-  {
+  public function exibir($id) {
     $prof = Professor::find($id);
     $profs = Professor::all();
 
@@ -55,8 +52,7 @@ class ProfessorController extends Controller
     return view('prof.index')->with(array('prof' => $prof, 'profs' => $profs));
   }
 
-  public function editar(Request $req, $id)
-  {
+  public function editar(Request $req, $id) {
     $this->validar($req);
 
     $prof = Professor::findOrFail($id);
@@ -71,8 +67,7 @@ class ProfessorController extends Controller
     return redirect()->action('ProfessorController@index')->withInput();
   }
 
-  public function excluir($id)
-  {
+  public function excluir($id) {
     $profs = new Professor();
     $profs = Professor::destroy($id);
     return redirect()->action('ProfessorController@index')->withInput();
@@ -92,6 +87,10 @@ class ProfessorController extends Controller
     $prof = Professor::find($id);
     $feriados = Feriado::select('data', 'informacao')->where('data', 'like', '%-' . $mes . '-%')->get();
     
+    $prof['dia'] = explode(";", $prof['dia']);
+    $prof['entrada'] = explode(";", $prof['entrada']);
+    $prof['saida'] = explode(";", $prof['saida']);
+    
     return view('prof.imprimir')->with(array('prof' => $prof, 'feriados' => $feriados, 'mes' => $mes, 'ano' => $ano));
   }
 
@@ -101,7 +100,13 @@ class ProfessorController extends Controller
   
     $profs = Professor::all();
     $feriados = Feriado::select('data', 'informacao')->where('data', 'like', '%-' . $mes . '-%')->get();
-        
+    
+    for($i = 0; $i < count($profs); $i++) {
+      $profs[$i]['dia'] = explode(";", $profs[$i]['dia']);
+      $profs[$i]['entrada'] = explode(";", $profs[$i]['entrada']);
+      $profs[$i]['saida'] = explode(";", $profs[$i]['saida']);
+    }
+    
     return view('prof.imprimirtudo')->with(array('profs' => $profs, 'feriados' => $feriados, 'mes' => $mes, 'ano' => $ano));
   }
 }
