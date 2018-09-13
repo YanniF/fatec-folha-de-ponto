@@ -8,6 +8,7 @@ if (pagina.includes('impressao')) {
 }
 else if(pagina.includes('adm') || pagina.includes('feriado') || pagina.includes('prof')) {
   carregarModal();
+  carregarModalApagar();
   carregarPesquisar();
   alerta();
 }
@@ -60,7 +61,7 @@ function carregarPesquisar() {
 }
 
 function carregarModal() {
-  
+
   const modal = document.getElementById('modal-wrapper');
 
   document.getElementById('btnMostrarModal').addEventListener('click', mostrarModal);
@@ -72,6 +73,35 @@ function carregarModal() {
       esconderModal();
     }    
   });
+}
+
+function carregarModalApagar() {
+
+  const modal = document.getElementById('modal-wrapper2');
+  const botoes = document.querySelectorAll('.btn-apagar');
+  
+  Array.from(botoes).forEach(botao => {
+    botao.addEventListener('click', mostrarModalApagar);
+  });
+  
+  document.querySelector('.btn-fechar').addEventListener('click', esconderModalApagar);
+  
+  modal.addEventListener('click', function(e) {
+    if(e.target === modal) {
+      esconderModalApagar();
+    }    
+  });
+  
+  apagarItem();
+}
+
+function alerta() {
+
+  if(document.querySelector('.alerta')) {
+    setTimeout(function() {
+      document.querySelector('.alerta').remove();
+    }, 2500);
+  }
 }
 
 function mostrarModal() {
@@ -93,11 +123,26 @@ function esconderModal() {
   }
 }
 
+function mostrarModalApagar() {
+  const modal = document.getElementById('modal-wrapper2');
+
+  modal.classList.add('flex');
+  modal.classList.remove('hidden');
+
+  document.getElementById('btnApagar').dataset.id = this.dataset.id;
+}
+
+function esconderModalApagar() {
+  const modal = document.getElementById('modal-wrapper2');
+
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+}
+
 function alterarTabela() {
   
   const btnAddLinha = document.getElementById('btnAddLinha');
   const tbody = document.getElementById('horario');
-  // const btnApagarLinha = document.querySelector('.delete');
   
   btnAddLinha.addEventListener('click', function(e) {
     
@@ -142,12 +187,14 @@ function alterarTabela() {
   });
 }
 
-function alerta() {
-  if(document.querySelector('.alerta')) {
-    setTimeout(function() {
-      document.querySelector('.alerta').remove();
-    }, 2500);
-  }
+function apagarItem() {
+  const btnApagar = document.getElementById('btnApagar');
+  const p = pagina.split('/');
+
+  // /feriado/excluir/{id}
+  btnApagar.addEventListener('click', function() {
+    btnApagar.setAttribute('href', `/${p[1]}/excluir/${btnApagar.dataset.id}`);
+  })
 }
 
 function irParaImpressao() {

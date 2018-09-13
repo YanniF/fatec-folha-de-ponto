@@ -39,7 +39,7 @@
   <div class="modal">
     <div class="modal-header">
       <h3>Imprimir</h3>
-      <a href="#" class="btn-fechar">&times;</a href="#">   
+      <a href="#" class="btn-fechar">&times;</a>   
     </div>
     <div class="modal-body">
     

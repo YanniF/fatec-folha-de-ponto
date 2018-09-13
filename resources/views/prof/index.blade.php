@@ -35,7 +35,7 @@
           <td>{{$p->projeto}}</td>
           <td>
             <a href="/prof/exibir/{{$p->id}}" class="btn btn-editar" title="Editar funcionário"><i class="fas fa-pencil-alt"></i></a>
-            <a href="/prof/excluir/{{$p->id}}" class="btn btn-apagar" title="Apagar funcionário"><i class="fas fa-trash-alt"></i></a>
+            <a href="#" class="btn btn-apagar" title="Apagar funcionário" data-id="{{ $p->id}}"><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
       @endforeach
@@ -51,7 +51,7 @@
     <div class="modal">
       <div class="modal-header">
         <h3>{{ isset($prof) ? 'Editar' : 'Cadastrar' }}</h3>
-        <a href="#" class="btn-fechar">&times;</a href="#">   
+        <a href="#" class="btn-fechar">&times;</a>   
       </div>
       <div class="modal-body">
       @if(isset($prof))
@@ -152,6 +152,22 @@
           @endif 
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-wrapper modal-apagar" id="modal-wrapper2">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Apagar</h3>
+        <a href="#" class="btn-fechar">&times;</a>   
+      </div>
+      <div class="modal-body">
+        <p class="mensagem">Deseja apagar as informações deste professor?</p>      
+        <div class="form-group">
+          <a href="#" class="btn btn-modal" id="btnApagar">Apagar</a>
+          <input type="button" value="Cancelar" class="btn btn-modal" onclick="esconderModalApagar()">
+        </div>
       </div>
     </div>
   </div>

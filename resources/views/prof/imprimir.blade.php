@@ -79,7 +79,7 @@
           <?php
             for($c = 1; $c <= $data->daysInMonth; $c++) {
               
-              for($i = 1; $i < count($prof->dia); $i++) {
+              for($i = 0; $i < count($prof->dia); $i++) {
                 if(strtolower($prof->dia[$i]) == $data->formatLocalized('%a')) {
                   echo '<tr>';
                   echo '<td>' . $data->day . '</td>';

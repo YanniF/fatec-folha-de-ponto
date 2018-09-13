@@ -38,7 +38,7 @@
           <td>{{$feriado->informacao}}</td>
           <td>
             <a href="/feriado/exibir/{{$feriado->id}}" class="btn btn-editar" title="Editar feriado"><i class="fas fa-pencil-alt"></i></a>
-            <a href="/feriado/excluir/{{$feriado->id}}" class="btn btn-apagar" title="Apagar feriado" data-nome="feriado-{{ $feriado->id }}" data-id="{{ $feriado->id}}"><i class="fas fa-trash-alt"></i></a>
+            <a href="#" class="btn btn-apagar" title="Apagar feriado" data-id="{{$feriado->id}}"><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr> 
       @endforeach               
@@ -89,6 +89,22 @@
           @endif 
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-wrapper modal-apagar" id="modal-wrapper2">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Apagar</h3>
+        <a href="#" class="btn-fechar">&times;</a>   
+      </div>
+      <div class="modal-body">
+        <p class="mensagem">Deseja apagar as informações deste feriado?</p>      
+        <div class="form-group">
+          <a href="#" class="btn btn-modal" id="btnApagar">Apagar</a>
+          <input type="button" value="Cancelar" class="btn btn-modal" onclick="esconderModalApagar()">
+        </div>
       </div>
     </div>
   </div>
