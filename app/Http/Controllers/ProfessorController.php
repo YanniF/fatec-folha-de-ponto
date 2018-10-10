@@ -23,7 +23,7 @@ class ProfessorController extends Controller
   }
 
   public function index() {
-    $profs = Professor::all();
+    $profs = Professor::all()->sortBy("nome");
     return view('prof.index')->with('profs', $profs);
   }
 
@@ -43,7 +43,7 @@ class ProfessorController extends Controller
 
   public function exibir($id) {
     $prof = Professor::find($id);
-    $profs = Professor::all();
+    $profs = Professor::all()->sortBy("nome");
 
     $prof['dia'] = explode(";", $prof['dia']);
     $prof['entrada'] = explode(";", $prof['entrada']);
@@ -68,7 +68,7 @@ class ProfessorController extends Controller
   }
 
   public function excluir($id) {
-    $profs = new Professor();
+    // $profs = new Professor();
     $profs = Professor::destroy($id);
     return redirect()->action('ProfessorController@index')->withInput();
   }
@@ -76,7 +76,7 @@ class ProfessorController extends Controller
   public function impressao() {
     setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
-    $profs = Professor::all();
+    $profs = Professor::all()->sortBy("nome");
     return view('prof.impressao')->with('profs', $profs);
   }
 
@@ -98,7 +98,7 @@ class ProfessorController extends Controller
 
     setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
   
-    $profs = Professor::all();
+    $profs = Professor::all()->sortBy("nome");
     $feriados = Feriado::select('data', 'informacao')->where('data', 'like', '%-' . $mes . '-%')->get();
     
     for($i = 0; $i < count($profs); $i++) {

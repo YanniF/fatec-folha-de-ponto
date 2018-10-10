@@ -35,7 +35,7 @@
           <td>{{$p->projeto}}</td>
           <td>
             <a href="/prof/exibir/{{$p->id}}" class="btn btn-editar" title="Editar funcionário"><i class="fas fa-pencil-alt"></i></a>
-            <a href="#" class="btn btn-apagar" title="Apagar funcionário" data-id="{{ $p->id}}"><i class="fas fa-trash-alt"></i></a>
+            <a href="#" class="btn btn-apagar btn-chama-modal" title="Apagar funcionário" data-id="{{ $p->id}}"><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
       @endforeach
@@ -103,7 +103,7 @@
                       <option value="Qua" {{$prof->dia[$i] == 'Qua' ? 'selected' : ''}}>Qua</option>
                       <option value="Qui" {{$prof->dia[$i] == 'Qui' ? 'selected' : ''}}>Qui</option>
                       <option value="Sex" {{$prof->dia[$i] == 'Sex' ? 'selected' : ''}}>Sex</option>
-                      <option value="Sab" {{$prof->dia[$i] == 'Sab' ? 'selected' : ''}}>Sab</option>
+                      <option value="Sáb" {{$prof->dia[$i] == 'Sáb' ? 'selected' : ''}}>Sab</option>
                     </select>
                   </td>
                   <td>
@@ -126,7 +126,7 @@
                       <option value="Qua">Qua</option>
                       <option value="Qui">Qui</option>
                       <option value="Sex">Sex</option>
-                      <option value="Sab">Sab</option>
+                      <option value="Sáb">Sab</option>
                     </select>
                   </td>
                   <td>

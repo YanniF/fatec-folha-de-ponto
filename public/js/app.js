@@ -38,7 +38,7 @@ function carregarPesquisar() {
   pesquisarInput.addEventListener('blur', function() {
     pesquisarInput.value = "";
 
-    document.querySelectorAll('.tabela-item').forEach((linha) => {
+    document.querySelectorAll('.tabela-item').forEach(linha => {
       linha.style.display = 'table-row';
     })
   });
@@ -47,7 +47,7 @@ function carregarPesquisar() {
   pesquisarInput.addEventListener('keyup', function(e) {
     const texto = e.target.value.toLowerCase();
 
-    document.querySelectorAll('.tabela-item').forEach((linha) => {
+    document.querySelectorAll('.tabela-item').forEach(linha => {
       const item = linha.cells[0].textContent;
 
       if(item.toLowerCase().indexOf(texto) != -1) {
@@ -78,7 +78,7 @@ function carregarModal() {
 function carregarModalApagar() {
 
   const modal = document.getElementById('modal-wrapper2');
-  const botoes = document.querySelectorAll('.btn-apagar');
+  const botoes = document.querySelectorAll('.btn-chama-modal');
   
   Array.from(botoes).forEach(botao => {
     botao.addEventListener('click', mostrarModalApagar);
@@ -157,7 +157,7 @@ function alterarTabela() {
           <option value="Qua">Qua</option>
           <option value="Qui">Qui</option>
           <option value="Sex">Sex</option>
-          <option value="Sab">Sab</option>
+          <option value="Sáb">Sab</option>
         </select>
       </td>
       <td>

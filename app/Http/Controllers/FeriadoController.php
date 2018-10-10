@@ -18,7 +18,7 @@ class FeriadoController extends Controller
   
   public function index()
   {
-    $feriados = Feriado::all();
+    $feriados = Feriado::all()->sortBy("data");
     return view('feriado.index')->with('feriados', $feriados);
   }
 
@@ -35,7 +35,7 @@ class FeriadoController extends Controller
   public function exibir($id)
   {
     $f = Feriado::find($id);
-    $feriados = Feriado::all();
+    $feriados = Feriado::all()->sortBy("data");
 
     return view('feriado.index')->with(array('f' => $f, 'feriados' => $feriados));
   }

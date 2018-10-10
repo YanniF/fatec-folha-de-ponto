@@ -38,7 +38,7 @@
           <td>{{$feriado->informacao}}</td>
           <td>
             <a href="/feriado/exibir/{{$feriado->id}}" class="btn btn-editar" title="Editar feriado"><i class="fas fa-pencil-alt"></i></a>
-            <a href="#" class="btn btn-apagar" title="Apagar feriado" data-id="{{$feriado->id}}"><i class="fas fa-trash-alt"></i></a>
+            <a href="#" class="btn btn-apagar btn-chama-modal" title="Apagar feriado" data-id="{{$feriado->id}}"><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr> 
       @endforeach               

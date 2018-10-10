@@ -76,11 +76,11 @@
           <th>Assinatura</th>
         </tr>
         <tbody>
-          <?php
+          <?php 
             for($c = 1; $c <= $data->daysInMonth; $c++) {
               
-              for($i = 0; $i < count($prof->dia); $i++) {
-                if(strtolower($prof->dia[$i]) == $data->formatLocalized('%a')) {
+              for($i = 0; $i < count($prof->dia); $i++) { 
+                if(strtolower($prof->dia[$i]) == $data->formatLocalized('%a')) { 
                   echo '<tr>';
                   echo '<td>' . $data->day . '</td>';
                   echo '<td>' . $prof->dia[$i] . '</td>';

@@ -35,7 +35,7 @@
           <td>{{$a->cargo}}</td>
           <td>
             <a href="/adm/exibir/{{$a->id}}" class="btn btn-editar" title="Editar funcionário"><i class="fas fa-pencil-alt"></i></a>
-            <a href="#" class="btn btn-apagar" title="Apagar funcionário" data-id="{{$a->id}}"><i class="fas fa-trash-alt"></i></a>
+            <a href="#" class="btn btn-apagar btn-chama-modal" title="Apagar funcionário" data-id="{{$a->id}}"><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
       @endforeach

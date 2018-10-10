@@ -22,7 +22,7 @@ class AdministrativoController extends Controller
 
   public function index()
   {
-    $adms = Administrativo::all();
+    $adms = Administrativo::all()->sortBy("nome");
     return view('adm.index')->with('adms', $adms);
   }
 
@@ -43,7 +43,7 @@ class AdministrativoController extends Controller
   public function exibir($id)
   {
     $adm = Administrativo::find($id);
-    $adms = Administrativo::all();
+    $adms = Administrativo::all()->sortBy("nome");
 
     return view('adm.index')->with(array('adm' => $adm, 'adms' => $adms));
   }
@@ -64,7 +64,6 @@ class AdministrativoController extends Controller
   
   public function excluir($id)
   {
-    $feriados = new Administrativo();
     $feriados = Administrativo::destroy($id);
     return redirect()->action('AdministrativoController@index')->withInput();
   }
@@ -72,7 +71,7 @@ class AdministrativoController extends Controller
   public function impressao() {
     setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
-    $adms = Administrativo::all();
+    $adms = Administrativo::all()->sortBy("nome");
     return view('adm.impressao')->with('adms', $adms);
   }
 
@@ -92,7 +91,7 @@ class AdministrativoController extends Controller
 
     setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
   
-    $adms = Administrativo::all();
+    $adms = Administrativo::all()->sortBy("nome");
     $feriados = Feriado::select('data', 'informacao')->where('data', 'like', '%-' . $mes . '-%')->get(); // selecionando todos os feriados daquele mês
         
     return view('adm.imprimirtudo')->with(array('adms' => $adms, 'feriados' => $feriados, 'mes' => $mes, 'ano' => $ano));
